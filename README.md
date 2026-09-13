@@ -38,7 +38,7 @@
 
 | 插件版本 | DSH 版本 |
 | --- | --- |
-| `0.2.x` | `dsh@0.1.5-alpha.1` |
+| `0.2.x` | `dsh@0.1.5-rc.2` |
 | `0.1.x` | `dsh@0.1.0-rc.8` |
 
 DeepSeek Harness 仍处于预发布阶段，不同 RC 版本的客户端接口可能发生变化。升级 DSH 后，需要同时安装与新版本适配的插件版本。
@@ -50,7 +50,7 @@ DeepSeek Harness 仍处于预发布阶段，不同 RC 版本的客户端接口�
 假设安装包位于当前目录：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 plugin \
+npx --yes @deepseek-ai/dsh@0.1.5-rc.2 plugin \
   --profile web \
   add ./dsh-plugin-agent-workflow-0.2.0.tgz \
   --workspace-root
@@ -59,7 +59,7 @@ npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 plugin \
 检查安装结果：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 plugin \
+npx --yes @deepseek-ai/dsh@0.1.5-rc.2 plugin \
   --profile web \
   list --depth 0
 ```
@@ -67,7 +67,7 @@ npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 plugin \
 列表中出现 `dsh-plugin-agent-workflow 0.2.0` 表示安装成功。重启 Web UI 后即可看到“工作流”标签页：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 web
+npx --yes @deepseek-ai/dsh@0.1.5-rc.2 web
 ```
 
 ### 从 GitHub 安装
@@ -75,7 +75,7 @@ npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 web
 仓库发布 `v0.2.0` 标签后，可以直接安装固定版本。`web` profile：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 plugin \
+npx --yes @deepseek-ai/dsh@0.1.5-rc.2 plugin \
   --profile web \
   add github:xuanyuanzhifeng/dsh-plugin-agent-workflow#v0.2.0 \
   --workspace-root
@@ -84,7 +84,7 @@ npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 plugin \
 `video` profile 使用相同插件版本：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 plugin \
+npx --yes @deepseek-ai/dsh@0.1.5-rc.2 plugin \
   --profile video \
   add github:xuanyuanzhifeng/dsh-plugin-agent-workflow#v0.2.0 \
   --workspace-root
@@ -97,7 +97,7 @@ pnpm dsh --profile video
 ## 卸载
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.1.5-alpha.1 plugin \
+npx --yes @deepseek-ai/dsh@0.1.5-rc.2 plugin \
   --profile web \
   remove dsh-plugin-agent-workflow \
   --workspace-root
