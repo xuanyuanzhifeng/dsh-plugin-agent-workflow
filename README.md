@@ -38,13 +38,23 @@
 
 | 插件版本 | DSH 版本 |
 | --- | --- |
-| `0.3.x` | `dsh@0.2.0-rc.2` |
+| `0.3.1` | `dsh@0.2.0-rc.2` · `dsh@0.2.1-alpha.2`（并放宽为整个 `0.2.x`） |
+| `0.3.0` | `dsh@0.2.0-rc.2` |
 | `0.2.x` | `dsh@0.1.5-alpha.1` |
 | `0.1.x` | `dsh@0.1.0-rc.8` |
 
 从插件 `0.2.x` 升级时，安装 `0.3.x` 并重启 Web UI。此版本支持 DSH 新增的工具准备阶段（参数尚未生成），并从当前请求配置读取模型名称。
 
 DeepSeek Harness 仍处于预发布阶段，不同 RC 版本的客户端接口可能发生变化。升级 DSH 后，需要同时安装与新版本适配的插件版本。
+
+### 0.3.1
+
+- **不再锁定 DSH 的 peer 版本**：`0.3.0` 把 `@deepseek-ai/dsh-*` 精确锁在 `0.2.0-rc.2`，DSH 的版本护栏会因此拒绝在 `0.2.1-alpha.2` 等运行时上加载本插件（提示
+  `Plugin … is incompatible with dsh …`，只给出 `dsh plugin allow-version` 的免责出口）。现在这些包仍作为 `devDependencies` 精确固定，**但不再作为 `peerDependencies` 对外声明**，
+  与其它第三方 DSH 插件（`dsh-anchored-standard`、`@liustack/modlens`）的做法一致。
+- **适配 `dsh@0.2.1` 的 `ToolCallHead.args`**：0.2.1 起每个工具调用（含 `preparing` 阶段）都带一个惰性参数视图 `args: PartialArguments`。插件只在测试夹具中补齐该字段
+  （`PartialArguments.EMPTY` —— preparing 阶段本就没有参数，与"不伪造参数"的既有断言一致）；运行时行为不变。
+- 已在 `dsh@0.2.1-alpha.2` 上通过 `pnpm typecheck`、`pnpm build` 与 `pnpm test`（7 个测试文件 / 20 个测试）。
 
 ## 安装
 

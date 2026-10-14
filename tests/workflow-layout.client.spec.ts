@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { RunningToolCall } from '@deepseek-ai/dsh-client-ui-conversation/client'
+import { PartialArguments } from '@deepseek-ai/dsh-util-values'
 import { deriveWorkflowLayout } from '../src/client/projection/layout.ts'
 
 function cells(call: RunningToolCall) {
@@ -8,11 +9,15 @@ function cells(call: RunningToolCall) {
 }
 
 describe('Workflow tool preparation', () => {
+  // dsh 0.2.1 requires ToolCallHead.args (a lazy PartialArguments view) on every phase.
+  // A preparing call has no arguments yet, which is exactly PartialArguments.EMPTY.
   const preparing: RunningToolCall = {
     phase: 'preparing', callId: 'root', name: 'run_code', turn: 1, step: 1, time: 100,
+    args: PartialArguments.EMPTY,
     subCalls: [{
       phase: 'preparing', callId: 'child', name: 'read', turn: 1, step: 1,
       time: 110, parentCallId: 'root', subCalls: [],
+      args: PartialArguments.EMPTY,
     }],
   }
 
