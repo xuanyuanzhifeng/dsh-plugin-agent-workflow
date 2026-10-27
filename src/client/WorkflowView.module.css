@@ -136,7 +136,7 @@
   min-height: 0;
   overflow: auto;
   overscroll-behavior: contain;
-  padding: 14px 16px 24px;
+  padding: 14px 16px calc(var(--dsh-composer-height, 152px) + 16px);
   box-sizing: border-box;
   scrollbar-gutter: stable;
 }

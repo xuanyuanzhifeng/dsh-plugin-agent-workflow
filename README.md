@@ -38,11 +38,14 @@
 
 | 插件版本 | DSH 版本 |
 | --- | --- |
+| `0.4.x` | `dsh@0.2.1-rc.2`、`dsh@0.2.1-rc.4` |
 | `0.3.x` | `dsh@0.2.0-rc.2` |
 | `0.2.x` | `dsh@0.1.5-alpha.1` |
 | `0.1.x` | `dsh@0.1.0-rc.8` |
 
-从插件 `0.2.x` 升级时，安装 `0.3.x` 并重启 Web UI。此版本支持 DSH 新增的工具准备阶段（参数尚未生成），并从当前请求配置读取模型名称。
+从插件 `0.3.x` 升级时，安装 `0.4.x` 并刷新或重启 Web UI。此版本更新 DSH SDK 与 Cordis 依赖，并声明精确的 `engines.dsh` 兼容范围。工具准备阶段仍仅展示工具名，分发后展示完整参数；测试夹具使用新版 `PartialArguments`。
+
+默认使用 `0.2.1-rc.2` SDK 构建。`0.2.1-rc.2` 和 `0.2.1-rc.4` 均通过构建、类型检查与 20 个测试；Web UI 的历史会话、请求详情、JSON 展开/放大及工具详情已在 `0.2.1-rc.2` 下实测。`0.2.1-rc.4` 尚未进行运行时 UI 验证。
 
 DeepSeek Harness 仍处于预发布阶段，不同 RC 版本的客户端接口可能发生变化。升级 DSH 后，需要同时安装与新版本适配的插件版本。
 
@@ -53,43 +56,43 @@ DeepSeek Harness 仍处于预发布阶段，不同 RC 版本的客户端接口�
 假设安装包位于当前目录：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.2.0-rc.2 plugin \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 plugin \
   --profile web \
-  add ./dsh-plugin-agent-workflow-0.3.0.tgz \
+  add ./dsh-plugin-agent-workflow-0.4.0.tgz \
   --workspace-root
 ```
 
 检查安装结果：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.2.0-rc.2 plugin \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 plugin \
   --profile web \
   list --depth 0
 ```
 
-列表中出现 `dsh-plugin-agent-workflow 0.3.0` 表示安装成功。重启 Web UI 后即可看到“工作流”标签页：
+列表中出现 `dsh-plugin-agent-workflow 0.4.0` 表示安装成功。重启 Web UI 后即可看到“工作流”标签页：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.2.0-rc.2 web
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 web
 ```
 
 ### 从 GitHub 安装
 
-仓库发布 `v0.3.0` 标签后，可以直接安装固定版本。`web` profile：
+仓库发布 `v0.4.0` 标签后，可以直接安装固定版本。`web` profile：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.2.0-rc.2 plugin \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 plugin \
   --profile web \
-  add github:xuanyuanzhifeng/dsh-plugin-agent-workflow#v0.3.0 \
+  add github:xuanyuanzhifeng/dsh-plugin-agent-workflow#v0.4.0 \
   --workspace-root
 ```
 
 `video` profile 使用相同插件版本：
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.2.0-rc.2 plugin \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 plugin \
   --profile video \
-  add github:xuanyuanzhifeng/dsh-plugin-agent-workflow#v0.3.0 \
+  add github:xuanyuanzhifeng/dsh-plugin-agent-workflow#v0.4.0 \
   --workspace-root
 
 pnpm dsh --profile video
@@ -100,7 +103,7 @@ pnpm dsh --profile video
 ## 卸载
 
 ```sh
-npx --yes @deepseek-ai/dsh@0.2.0-rc.2 plugin \
+npx --yes @deepseek-ai/dsh@0.2.1-rc.2 plugin \
   --profile web \
   remove dsh-plugin-agent-workflow \
   --workspace-root
@@ -110,10 +113,10 @@ npx --yes @deepseek-ai/dsh@0.2.0-rc.2 plugin \
 
 ### 安装到本地 DSH 源码目录
 
-在已经安装依赖并构建好的 DSH `0.2.0-rc.2` 源码目录中执行（替换安装包的绝对路径）：
+在已经安装依赖并构建好的 DSH `0.2.1-rc.2` 源码目录中执行（替换安装包的绝对路径）：
 
 ```sh
-pnpm dsh plugin --profile web add /absolute/path/dsh-plugin-agent-workflow-0.3.0.tgz --workspace-root
+pnpm dsh plugin --profile web add /absolute/path/dsh-plugin-agent-workflow-0.4.0.tgz --workspace-root
 pnpm dsh plugin --profile web list --depth 0
 pnpm dsh web
 ```

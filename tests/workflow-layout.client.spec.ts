@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { RunningToolCall } from '@deepseek-ai/dsh-client-ui-conversation/client'
+import { PartialArguments } from '@deepseek-ai/dsh-util-values'
 import { deriveWorkflowLayout } from '../src/client/projection/layout.ts'
 
 function cells(call: RunningToolCall) {
@@ -10,9 +11,11 @@ function cells(call: RunningToolCall) {
 describe('Workflow tool preparation', () => {
   const preparing: RunningToolCall = {
     phase: 'preparing', callId: 'root', name: 'run_code', turn: 1, step: 1, time: 100,
+    args: PartialArguments.fromObject({}),
     subCalls: [{
       phase: 'preparing', callId: 'child', name: 'read', turn: 1, step: 1,
       time: 110, parentCallId: 'root', subCalls: [],
+      args: PartialArguments.fromObject({}),
     }],
   }
 
@@ -27,8 +30,10 @@ describe('Workflow tool preparation', () => {
   it('reveals complete arguments when root and nested calls dispatch', () => {
     const result = cells({
       ...preparing, phase: 'start', argsRaw: '{"code":"read()"}',
+      args: PartialArguments.fromObject({ code: 'read()' }),
       subCalls: [{
         ...preparing.subCalls[0]!, phase: 'start', argsRaw: '{"path":"README.md"}',
+        args: PartialArguments.fromObject({ path: 'README.md' }),
       } as RunningToolCall],
     })
     expect(result.map(cell => cell.inputDetail))
